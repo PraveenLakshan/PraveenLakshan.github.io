@@ -3,223 +3,397 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coming Soon | Portfolio</title>
+    <title>Coming Soon | Advanced</title>
     <style>
-        /* --- CSS Reset & Variables --- */
+        /* --- 1. Variables & Reset --- */
         :root {
-            --bg-color: #0f172a;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent: #38bdf8; /* Light Blue */
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --bg-dark: #020617;
+            --accent-primary: #6366f1; /* Indigo */
+            --accent-secondary: #a855f7; /* Purple */
+            --text-light: #f8fafc;
+            --text-gray: #94a3b8;
+            --glass-surface: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --font-main: 'Inter', system-ui, -apple-system, sans-serif;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: var(--font-main);
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow: hidden; /* Hide scrollbars for canvas */
             height: 100vh;
             display: flex;
-            align-items: center;
             justify-content: center;
-            overflow: hidden;
+            align-items: center;
             position: relative;
         }
 
-        /* --- Background Animation --- */
-        .bg-glow {
+        /* --- 2. Background Canvas --- */
+        #canvas-bg {
             position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, rgba(15, 23, 42, 0) 70%);
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: -1;
-            animation: pulse 6s infinite ease-in-out;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
-            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.5; }
-        }
-
-        /* --- Main Container (Glassmorphism) --- */
-        .container {
-            text-align: center;
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            padding: 3rem 2rem;
-            border-radius: 20px;
+        /* --- 3. Main Glass Card --- */
+        .card {
+            position: relative;
+            z-index: 10;
             width: 90%;
-            max-width: 500px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            animation: fadeInUp 1s ease-out;
+            max-width: 600px;
+            background: var(--glass-surface);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            animation: slideUp 1s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- Typography --- */
+        /* --- 4. Typography & Elements --- */
         h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
+            font-size: 3rem;
+            font-weight: 800;
             margin-bottom: 0.5rem;
-            letter-spacing: -1px;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1.5px;
         }
 
-        .status {
-            display: inline-block;
-            background: rgba(56, 189, 248, 0.1);
-            color: var(--accent);
-            padding: 0.4rem 1rem;
-            border-radius: 50px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            border: 1px solid rgba(56, 189, 248, 0.2);
-        }
-
-        p {
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 2rem;
+        .subtitle {
             font-size: 1.1rem;
-        }
-
-        /* --- Input Field (Modern) --- */
-        .notify-form {
-            display: flex;
-            gap: 10px;
+            color: var(--text-gray);
             margin-bottom: 2rem;
+            height: 1.5rem; /* Fix height for typing jump */
         }
 
-        input[type="email"] {
-            flex: 1;
-            padding: 12px 16px;
-            border-radius: 8px;
-            border: 1px solid var(--glass-border);
-            background: rgba(0, 0, 0, 0.2);
-            color: #fff;
-            outline: none;
-            transition: border-color 0.3s;
+        .highlight {
+            color: var(--accent-primary);
+            font-weight: 600;
         }
 
-        input[type="email"]:focus {
-            border-color: var(--accent);
-        }
-
-        button {
-            padding: 12px 24px;
-            border-radius: 8px;
-            border: none;
-            background: var(--accent);
-            color: #0f172a;
-            font-weight: 700;
-            cursor: pointer;
-            transition: opacity 0.3s, transform 0.1s;
-        }
-
-        button:hover {
-            opacity: 0.9;
-        }
-
-        button:active {
-            transform: scale(0.98);
-        }
-
-        /* --- Footer / Socials --- */
-        .footer {
-            margin-top: 1rem;
-            font-size: 0.875rem;
-            color: var(--text-muted);
-        }
-
-        .social-links {
-            margin-top: 1rem;
+        /* --- 5. Countdown Timer --- */
+        .countdown {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
         }
 
-        .social-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.3s;
-            font-size: 1.2rem;
+        .time-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .social-links a:hover {
-            color: var(--accent);
+        .time-val {
+            font-size: 2rem;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        /* --- Dynamic Text Cursor --- */
-        .typing-cursor::after {
-            content: '|';
-            animation: blink 1s step-start infinite;
+        .time-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-gray);
+            margin-top: 0.25rem;
         }
 
-        @keyframes blink {
-            50% { opacity: 0; }
+        /* --- 6. Input & Button --- */
+        .input-group {
+            position: relative;
+            display: flex;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 20px;
+            padding-right: 120px; /* Space for button */
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        button.btn-submit {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            bottom: 5px;
+            padding: 0 20px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        button.btn-submit:hover { opacity: 0.9; }
+        button.btn-submit:active { transform: scale(0.96); }
+
+        /* --- 7. Toast Notification --- */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #10b981; /* Success Green */
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 16px;
+            position: fixed;
+            z-index: 100;
+            bottom: 30px;
+            font-size: 0.9rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s;
+        }
+
+        #toast.show {
+            visibility: visible;
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.2rem; }
+            .card { padding: 2rem 1.5rem; width: 95%; }
+            .countdown { gap: 0.8rem; }
+            .time-val { font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-glow"></div>
+    <canvas id="canvas-bg"></canvas>
 
-    <div class="container">
-        <div class="status">Under Construction</div>
+    <div class="card">
+        <h1>Coming Soon</h1>
         
-        <h1>Hello, I'm <span id="name-placeholder">Your Name</span>.</h1>
-        
-        <p>I'm currently building my <span class="typing-text" style="color: var(--accent);">Portfolio</span><span class="typing-cursor"></span>.<br>
-        Check back soon for updates.</p>
+        <p class="subtitle">
+            We are building a <span class="highlight" id="typewriter"></span>
+        </p>
 
-        <form class="notify-form" onsubmit="event.preventDefault(); alert('Thanks! We will let you know when it is live.');">
-            <input type="email" placeholder="Enter your email" required>
-            <button type="submit">Notify Me</button>
-        </form>
-
-        <div class="footer">
-            &copy; <span id="year"></span> All rights reserved.
-            <div class="social-links">
-                <a href="#">LinkedIn</a>
-                <a href="#">GitHub</a>
-                <a href="#">Twitter</a>
+        <div class="countdown">
+            <div class="time-box">
+                <span class="time-val" id="days">00</span>
+                <span class="time-label">Days</span>
+            </div>
+            <div class="time-box">
+                <span class="time-val" id="hours">00</span>
+                <span class="time-label">Hours</span>
+            </div>
+            <div class="time-box">
+                <span class="time-val" id="minutes">00</span>
+                <span class="time-label">Mins</span>
+            </div>
+            <div class="time-box">
+                <span class="time-val" id="seconds">00</span>
+                <span class="time-label">Secs</span>
             </div>
         </div>
+
+        <form id="notifyForm" class="input-group">
+            <input type="email" placeholder="Enter your email address" required>
+            <button type="submit" class="btn-submit">Notify Me</button>
+        </form>
     </div>
 
-    <script>
-        // 1. Set Current Year
-        document.getElementById('year').textContent = new Date().getFullYear();
+    <div id="toast">You're on the list! We'll be in touch.</div>
 
-        // 2. Simple Typing Effect for the subtitle
-        const words = ["Portfolio", "Projects", "Space"];
+    <script>
+        // --- 1. Canvas Particle Network Animation ---
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+        let particlesArray;
+
+        // Resize Canvas
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let mouse = { x: null, y: null, radius: 150 };
+
+        window.addEventListener('mousemove', function(event) {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x;
+                this.y = y;
+                this.directionX = directionX;
+                this.directionY = directionY;
+                this.size = size;
+                this.color = color;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = '#6366f1'; // Particle Color
+                ctx.fill();
+            }
+            update() {
+                // Check boundaries
+                if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+                if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+
+                // Move particle
+                this.x += this.directionX;
+                this.y += this.directionY;
+
+                // Mouse interactivity
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx*dx + dy*dy);
+                
+                if (distance < mouse.radius + this.size){
+                    if (mouse.x < this.x && this.x < canvas.width - this.size * 10) this.x += 2;
+                    if (mouse.x > this.x && this.x > this.size * 10) this.x -= 2;
+                    if (mouse.y < this.y && this.y < canvas.height - this.size * 10) this.y += 2;
+                    if (mouse.y > this.y && this.y > this.size * 10) this.y -= 2;
+                }
+                this.draw();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            let numberOfParticles = (canvas.height * canvas.width) / 9000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                let size = (Math.random() * 2) + 1;
+                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                let directionX = (Math.random() * 2) - 1; // Speed
+                let directionY = (Math.random() * 2) - 1;
+                let color = '#fff';
+                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0,0,innerWidth, innerHeight);
+
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+            connect();
+        }
+
+        function connect() {
+            let opacityValue = 1;
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + 
+                                   ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    
+                    if (distance < (canvas.width/7) * (canvas.height/7)) {
+                        opacityValue = 1 - (distance/20000);
+                        ctx.strokeStyle = 'rgba(99, 102, 241,' + opacityValue + ')'; // Line color
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        window.addEventListener('resize', function(){
+            canvas.width = innerWidth;
+            canvas.height = innerHeight;
+            mouse.radius = ((canvas.height/80) * (canvas.height/80));
+            init();
+        });
+
+        init();
+        animate();
+
+
+        // --- 2. Countdown Timer Logic ---
+        // Set Launch Date (14 days from now for demo)
+        const launchDate = new Date();
+        launchDate.setDate(launchDate.getDate() + 14); 
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+        }
+        setInterval(updateCountdown, 1000);
+
+
+        // --- 3. Typewriter Effect ---
+        const words = ["Digital Experience", "Modern Portfolio", "Creative Space"];
         let i = 0;
         let timer;
 
-        function typeEffect() {
-            // Optional: You can expand this logic to cycle through words if you want
-            // For now, it keeps "Portfolio" static to keep it simple as requested.
+        function typeWriter() {
+            const heading = document.getElementById("typewriter");
+            heading.textContent = words[i];
+            
+            // Just a simple cycle for the demo, can be made complex with char-by-char typing
+            i = (i + 1) % words.length; 
         }
         
-        // If you want to customize the name via JS quickly:
-        // document.getElementById('name-placeholder').textContent = "Praveen";
+        // Simple word cycle every 3 seconds
+        setInterval(typeWriter, 3000);
+        typeWriter(); // Init immediately
+
+
+        // --- 4. Toast Notification ---
+        document.getElementById("notifyForm").addEventListener("submit", function(e){
+            e.preventDefault();
+            const toast = document.getElementById("toast");
+            toast.className = "show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+            this.reset();
+        });
+
     </script>
 </body>
 </html>
