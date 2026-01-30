@@ -1,399 +1,318 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coming Soon | Advanced</title>
+    <title>Praveen Lakshan | Coming Soon</title>
+    <link rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='0' y='0' width='64' height='64' rx='12' fill='%230f172a'/%3E%3Cpath d='M18 20 L30 32 L18 44' fill='none' stroke='%2338bdf8' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='36' y='38' width='14' height='6' fill='%2338bdf8'/%3E%3C/svg%3E"
+        type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
     <style>
-        /* --- 1. Variables & Reset --- */
+        /* --- 1. PROFESSIONAL VARIABLES --- */
         :root {
-            --bg-dark: #020617;
-            --accent-primary: #6366f1; /* Indigo */
-            --accent-secondary: #a855f7; /* Purple */
-            --text-light: #f8fafc;
-            --text-gray: #94a3b8;
-            --glass-surface: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+            --bg: #0A0A0A;
+            --surface: #171717;
+            --border: #262626;
+            --text-primary: #EDEDED;
+            --text-secondary: #A1A1AA;
+            --accent: #FFFFFF;
+            --success: #22c55e;
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
-            font-family: var(--font-main);
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            overflow: hidden; /* Hide scrollbars for canvas */
+            background-color: var(--bg);
+            color: var(--text-primary);
+            font-family: var(--font);
             height: 100vh;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        /* --- 2. Background Canvas --- */
-        #canvas-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-
-        /* --- 3. Main Glass Card --- */
-        .card {
-            position: relative;
-            z-index: 10;
-            width: 90%;
-            max-width: 600px;
-            background: var(--glass-surface);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 3rem;
-            text-align: center;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
-            animation: slideUp 1s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- 4. Typography & Elements --- */
-        h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -1.5px;
-        }
-
-        .subtitle {
-            font-size: 1.1rem;
-            color: var(--text-gray);
-            margin-bottom: 2rem;
-            height: 1.5rem; /* Fix height for typing jump */
-        }
-
-        .highlight {
-            color: var(--accent-primary);
-            font-weight: 600;
-        }
-
-        /* --- 5. Countdown Timer --- */
-        .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .time-box {
-            display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
+            padding: 20px;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .time-val {
-            font-size: 2rem;
-            font-weight: 700;
-            font-variant-numeric: tabular-nums;
-            background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+        /* --- 2. LAYOUT CONTAINER --- */
+        .container {
+            width: 100%;
+            max-width: 480px;
+            opacity: 0;
+            animation: fadeIn 0.8s var(--ease) forwards;
+        }
+
+        /* --- 3. STATUS BAR --- */
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 99px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--success);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        /* --- 4. TYPOGRAPHY --- */
+        h1 {
+            font-size: 48px;
+            font-weight: 600;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            background: linear-gradient(to bottom right, #fff, #888);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .time-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-gray);
-            margin-top: 0.25rem;
+        p {
+            color: var(--text-secondary);
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            font-weight: 300;
         }
 
-        /* --- 6. Input & Button --- */
-        .input-group {
-            position: relative;
+        /* --- 5. PROGRESS BAR --- */
+        .progress-container {
+            margin-bottom: 40px;
+        }
+
+        .progress-label {
             display: flex;
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
-        input {
-            width: 100%;
-            padding: 14px 20px;
-            padding-right: 120px; /* Space for button */
-            border-radius: 12px;
-            border: 1px solid var(--glass-border);
-            background: rgba(0, 0, 0, 0.3);
-            color: #fff;
-            font-size: 1rem;
-            transition: all 0.3s ease;
+        .progress-track {
+            height: 4px;
+            background: var(--surface);
+            border-radius: 4px;
+            overflow: hidden;
         }
 
-        input:focus {
-            outline: none;
-            border-color: var(--accent-primary);
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        .progress-fill {
+            height: 100%;
+            background: var(--text-primary);
+            width: 0%;
+            /* JS will animate this */
+            transition: width 1.5s var(--ease);
+            border-radius: 4px;
         }
 
-        button.btn-submit {
-            position: absolute;
-            right: 5px;
-            top: 5px;
-            bottom: 5px;
-            padding: 0 20px;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            border: none;
+        /* --- 6. ACTION BUTTONS --- */
+        .actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px;
             border-radius: 8px;
-            color: white;
-            font-weight: 600;
+            font-size: 14px;
+            font-weight: 500;
             cursor: pointer;
-            transition: transform 0.2s, opacity 0.2s;
+            transition: all 0.2s ease;
+            text-decoration: none;
         }
 
-        button.btn-submit:hover { opacity: 0.9; }
-        button.btn-submit:active { transform: scale(0.96); }
-
-        /* --- 7. Toast Notification --- */
-        #toast {
-            visibility: hidden;
-            min-width: 250px;
-            background-color: #10b981; /* Success Green */
-            color: #fff;
-            text-align: center;
-            border-radius: 8px;
-            padding: 16px;
-            position: fixed;
-            z-index: 100;
-            bottom: 30px;
-            font-size: 0.9rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
-            transform: translateY(20px);
-            opacity: 0;
-            transition: all 0.5s;
+        .btn-primary {
+            background: var(--text-primary);
+            color: var(--bg);
+            border: 1px solid var(--text-primary);
         }
 
-        #toast.show {
-            visibility: visible;
-            transform: translateY(0);
-            opacity: 1;
+        .btn-primary:hover {
+            background: #ccc;
+            border-color: #ccc;
         }
 
-        /* Mobile Adjustments */
-        @media (max-width: 600px) {
-            h1 { font-size: 2.2rem; }
-            .card { padding: 2rem 1.5rem; width: 95%; }
-            .countdown { gap: 0.8rem; }
-            .time-val { font-size: 1.5rem; }
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface);
+            border-color: #404040;
+        }
+
+        /* --- 7. FOOTER --- */
+        .footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .socials a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-left: 16px;
+            transition: color 0.2s;
+        }
+
+        .socials a:hover {
+            color: var(--text-primary);
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 500px) {
+            h1 {
+                font-size: 36px;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
+
 <body>
 
-    <canvas id="canvas-bg"></canvas>
+    <div class="container">
+        <div class="status-pill">
+            <div class="status-dot"></div>
+            <span>System Upgrade In Progress</span>
+        </div>
 
-    <div class="card">
-        <h1>Coming Soon</h1>
-        
-        <p class="subtitle">
-            We are building a <span class="highlight" id="typewriter"></span>
+        <h1>Refining the<br>Digital Experience.</h1>
+
+        <p>
+            I Aam Currently Restructuring My Portfolio To Align With Modern Web Standards.
+            The New Interface Will Focus On Performance, Accessibility, And Minimal Design.
         </p>
 
-        <div class="countdown">
-            <div class="time-box">
-                <span class="time-val" id="days">00</span>
-                <span class="time-label">Days</span>
+        <div class="progress-container">
+            <div class="progress-label">
+                <span>Development Phase</span>
+                <span>85%</span>
             </div>
-            <div class="time-box">
-                <span class="time-val" id="hours">00</span>
-                <span class="time-label">Hours</span>
-            </div>
-            <div class="time-box">
-                <span class="time-val" id="minutes">00</span>
-                <span class="time-label">Mins</span>
-            </div>
-            <div class="time-box">
-                <span class="time-val" id="seconds">00</span>
-                <span class="time-label">Secs</span>
+            <div class="progress-track">
+                <div class="progress-fill" id="progressBar"></div>
             </div>
         </div>
 
-        <form id="notifyForm" class="input-group">
-            <input type="email" placeholder="Enter your email address" required>
-            <button type="submit" class="btn-submit">Notify Me</button>
-        </form>
+        <div class="actions">
+            <button class="btn btn-primary" onclick="copyEmail()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                </svg>
+                <span id="email-btn-text">Copy Email</span>
+            </button>
+
+            <a href="https://www.linkedin.com/in/praveenlakshan/" target="_blank" class="btn btn-secondary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                    <rect x="2" y="9" width="4" height="12"></rect>
+                    <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+                LinkedIn
+            </a>
+        </div>
+
+        <div class="footer">
+            <span>&copy; <span id="year"></span> Praveen Lakshan</span>
+            <div class="socials">
+                <a href="https://github.com/PraveenLakshan">GitHub</a>
+
+            </div>
+        </div>
     </div>
 
-    <div id="toast">You're on the list! We'll be in touch.</div>
-
     <script>
-        // --- 1. Canvas Particle Network Animation ---
-        const canvas = document.getElementById('canvas-bg');
-        const ctx = canvas.getContext('2d');
-        let particlesArray;
+        // 1. Animate Progress Bar on Load
+        setTimeout(() => {
+            document.getElementById('progressBar').style.width = '85%';
+        }, 300);
 
-        // Resize Canvas
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        // 2. Set Year
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-        let mouse = { x: null, y: null, radius: 150 };
+        // 3. Copy Email Function
+        function copyEmail() {
+            // Replace with your actual email
+            const email = "praveenlakshan05@gmail.com";
 
-        window.addEventListener('mousemove', function(event) {
-            mouse.x = event.x;
-            mouse.y = event.y;
-        });
+            navigator.clipboard.writeText(email).then(() => {
+                const btnText = document.getElementById('email-btn-text');
+                const originalText = btnText.innerText;
 
-        class Particle {
-            constructor(x, y, directionX, directionY, size, color) {
-                this.x = x;
-                this.y = y;
-                this.directionX = directionX;
-                this.directionY = directionY;
-                this.size = size;
-                this.color = color;
-            }
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                ctx.fillStyle = '#6366f1'; // Particle Color
-                ctx.fill();
-            }
-            update() {
-                // Check boundaries
-                if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
-                if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
-
-                // Move particle
-                this.x += this.directionX;
-                this.y += this.directionY;
-
-                // Mouse interactivity
-                let dx = mouse.x - this.x;
-                let dy = mouse.y - this.y;
-                let distance = Math.sqrt(dx*dx + dy*dy);
-                
-                if (distance < mouse.radius + this.size){
-                    if (mouse.x < this.x && this.x < canvas.width - this.size * 10) this.x += 2;
-                    if (mouse.x > this.x && this.x > this.size * 10) this.x -= 2;
-                    if (mouse.y < this.y && this.y < canvas.height - this.size * 10) this.y += 2;
-                    if (mouse.y > this.y && this.y > this.size * 10) this.y -= 2;
-                }
-                this.draw();
-            }
+                // Feedback animation
+                btnText.innerText = "Copied!";
+                setTimeout(() => {
+                    btnText.innerText = originalText;
+                }, 2000);
+            });
         }
-
-        function init() {
-            particlesArray = [];
-            let numberOfParticles = (canvas.height * canvas.width) / 9000;
-            for (let i = 0; i < numberOfParticles; i++) {
-                let size = (Math.random() * 2) + 1;
-                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
-                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
-                let directionX = (Math.random() * 2) - 1; // Speed
-                let directionY = (Math.random() * 2) - 1;
-                let color = '#fff';
-                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
-            }
-        }
-
-        function animate() {
-            requestAnimationFrame(animate);
-            ctx.clearRect(0,0,innerWidth, innerHeight);
-
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-            }
-            connect();
-        }
-
-        function connect() {
-            let opacityValue = 1;
-            for (let a = 0; a < particlesArray.length; a++) {
-                for (let b = a; b < particlesArray.length; b++) {
-                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + 
-                                   ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-                    
-                    if (distance < (canvas.width/7) * (canvas.height/7)) {
-                        opacityValue = 1 - (distance/20000);
-                        ctx.strokeStyle = 'rgba(99, 102, 241,' + opacityValue + ')'; // Line color
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        window.addEventListener('resize', function(){
-            canvas.width = innerWidth;
-            canvas.height = innerHeight;
-            mouse.radius = ((canvas.height/80) * (canvas.height/80));
-            init();
-        });
-
-        init();
-        animate();
-
-
-        // --- 2. Countdown Timer Logic ---
-        // Set Launch Date (14 days from now for demo)
-        const launchDate = new Date();
-        launchDate.setDate(launchDate.getDate() + 14); 
-
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = launchDate - now;
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
-            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
-            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
-            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
-        }
-        setInterval(updateCountdown, 1000);
-
-
-        // --- 3. Typewriter Effect ---
-        const words = ["Digital Experience", "Modern Portfolio", "Creative Space"];
-        let i = 0;
-        let timer;
-
-        function typeWriter() {
-            const heading = document.getElementById("typewriter");
-            heading.textContent = words[i];
-            
-            // Just a simple cycle for the demo, can be made complex with char-by-char typing
-            i = (i + 1) % words.length; 
-        }
-        
-        // Simple word cycle every 3 seconds
-        setInterval(typeWriter, 3000);
-        typeWriter(); // Init immediately
-
-
-        // --- 4. Toast Notification ---
-        document.getElementById("notifyForm").addEventListener("submit", function(e){
-            e.preventDefault();
-            const toast = document.getElementById("toast");
-            toast.className = "show";
-            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
-            this.reset();
-        });
-
     </script>
 </body>
+
 </html>
