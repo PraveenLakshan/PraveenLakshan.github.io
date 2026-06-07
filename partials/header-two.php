@@ -16,7 +16,7 @@
                     <div class="col-lg-2 col-md-6 col-6">
                         <div class="navbar-header">
                             <a class="navbar-brand site-logo" href="index.php"><img
-                                    src="assets/images/logo.png" alt="">Elito.</a>
+                                    src="assets/images/logo/PL.png" alt="">PRAVEEN LAKSHAN</a>
                         </div>
                     </div>
                     <div class="col-lg-8 col-md-1 col-1">
@@ -25,11 +25,7 @@
                             <ul class="nav navbar-nav mb-2 mb-lg-0">
                                 <li class="menu-item-has-children">
                                     <a href="#">Home</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="index.php">Main Home</a></li>
-                                        <li><a href="index-2.php">Home Style 2</a></li>
-                                        <li><a href="index-3.php">Home Style 3</a></li>
-                                    </ul>
+                                    
                                 </li>
                                 <li>
                                     <a href="about.php">About</a>

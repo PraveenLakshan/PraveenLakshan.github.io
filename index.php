@@ -22,14 +22,14 @@
                                 <div class="wpo-static-hero-inner">
                                     <div data-swiper-parallax="300" class="slide-title">
                                         <h2><span>Hello,</span>
-                                            I am Ronald.</h2>
+                                            I Am Praveen</h2>
                                     </div>
                                     <div data-swiper-parallax="300" class="slide-sub-title">
-                                        <h5>UI/UX Designer</h5>
+                                        <h5>Fulls Stack Developer</h5>
                                     </div>
                                     <div data-swiper-parallax="400" class="slide-text">
-                                        <p>Must explain to how all this mistaken idea denouncing pleasure pain
-                                            the system and expound the actua.</p>
+                                        <p>I Architect And Build Complete, End-To-End Web Solutions And I Specialize In Creating
+                                            Clean Code And Seamless User Experiences That Deliver Real-World Results.</p>
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="slide-btn"><a class="theme-btn" href="about.php">Hire Me</a></div>
@@ -42,16 +42,16 @@
             <div class="static-hero-right">
                 <div class="static-hero-img">
                     <div class="static-hero-img-inner">
-                        <img src="assets/images/slider/1.jpg" alt="">
-                        <div class="icon-1 floating-item"><img src="assets/images/icon/photoshop.svg" alt=""></div>
-                        <div class="icon-2 floating-item"><img src="assets/images/icon/illustrator.svg" alt=""></div>
-                        <div class="icon-3 floating-item"><img src="assets/images/icon/diamond.svg" alt=""></div>
+                        <img src="assets/images/slider/code.png" alt="">
+                        <div class="icon-1 floating-item"><img src="assets/images/icon/1.svg" alt=""></div>
+                        <div class="icon-2 floating-item"><img src="assets/images/icon/2.svg" alt=""></div>
+                        <div class="icon-3 floating-item"><img src="assets/images/icon/3.svg" alt=""></div>
                         <div class="project floating-item">
                             <div class="icon">
                                 <i class="fi flaticon-verified"></i>
                             </div>
                             <div class="p-text">
-                                <h3><span class="odometer" data-count="1500">00</span>+</h3>
+                                <h3><span class="odometer" data-count="100">00</span>+</h3>
                                 <p>Complete Project</p>
                             </div>
                         </div>
