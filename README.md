@@ -62,7 +62,7 @@ A Premium Browser-Based Creator And Productivity Workspace With 34+ Tools For Im
 
 A Modern Android/Mobile Application Project Focused On Refined Mobile Experience, Reliable Architecture, Kotlin Development, SQLite Integration, And Clean App Structure.
 
-### Nimithi / නිමිති
+### Nimithi
 
 A Luxury AI-Driven AstroVedic Web Platform Combining Traditional Spiritual Insight With Modern Intelligent Digital Experience And Sinhala + English Support.
 
